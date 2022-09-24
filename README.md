@@ -1,6 +1,6 @@
 To use this application, you must follow these steps:
 
-1.) Download the project files in a zip folder or clone the repository.
+1.) Download the zip folder or clone the repository.
 
 2.) Install MongoDB on your computer (if you don't already have it).
 
