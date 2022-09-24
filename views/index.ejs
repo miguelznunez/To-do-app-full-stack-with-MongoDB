@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>To-do List</title>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header">
+        <h2><i class="fas fa-clipboard-check"></i> To-do List</h2>
+        <div class="input-container">
+          <input type="text" id="user-input" placeholder="I need to..."><button id="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <section>
+    <div class="container">
+      <div class="to-do-list">
+        <% for (let i = 0; i < rows.length; i++) { %>
+          <div class="item">
+            <p><%= rows[i].name %></p>
+            <div class="options">
+              <% if(rows[i].cart) { %>
+                <i class="fa-solid fa-check green"></i>
+              <% } else { %>
+                <i class="fa-solid fa-check"></i>
+              <% } %>
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <script>
+
+    const userInput = document.querySelector("#user-input")
+    const checks = document.querySelectorAll(".fa-check")
+    const xmarks = document.querySelectorAll(".fa-xmark")
+    const rows = JSON.parse('<%-JSON.stringify(rows)%>')
+
+    // add a new todo item to the list
+    document.querySelector("#submit").addEventListener("click", () => {
+      addItem(userInput.value);
+    });
+
+    userInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter")
+        addItem(userInput.value)
+    })
+
+    // todo item has been completed
+    checks.forEach((check, i) => {
+      check.addEventListener("click", () => {
+        if (rows[i].cart) {
+          updateItem(rows[i]._id, false)
+        } else {
+          updateItem(rows[i]._id, true)
+        }
+      })
+    })
+
+    // delete this todo item from the list
+    xmarks.forEach((mark, i) => {
+      mark.addEventListener("click", () => {
+        deleteItem(rows[i]._id)
+      })
+    })
+
+    async function addItem(item) {
+      let url = `/addItem?item=${item}`;
+      await fetch(url);
+      location.reload();
+    }
+
+    async function updateItem(id, action) {
+      let url = `/updateItem?id=${id}&action=${action}`;
+      await fetch(url);
+      location.reload();
+    }
+
+    async function deleteItem(id, action) {
+      let url = `/deleteItem?id=${id}`;
+      await fetch(url);
+      location.reload();
+    }
+    
+
+  </script>
+
+</body>
+</html>
