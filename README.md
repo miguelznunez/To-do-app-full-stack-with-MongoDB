@@ -7,7 +7,7 @@ To use this application, you must follow these steps:
 3.) Create a .env file in the root directory and paste the following code inside: 
 NODE_ENV = development
 PORT = 5000
-MONGO_URI = mongodb://localhost:27017/todolist
+MONGO_URI = mongodb://localhost:27017/todoList
 
 4.) Run "npm install" on your VS code console to install all of the dependencies.
 
