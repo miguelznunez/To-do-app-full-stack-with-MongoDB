@@ -26,9 +26,9 @@
       <div class="to-do-list">
         <% for (let i = 0; i < rows.length; i++) { %>
           <div class="item">
-            <p><%= rows[i].name %></p>
+            <p><%= rows[i].item %></p>
             <div class="options">
-              <% if(rows[i].cart) { %>
+              <% if(rows[i].check) { %>
                 <i class="fa-solid fa-check green"></i>
               <% } else { %>
                 <i class="fa-solid fa-check"></i>
@@ -61,7 +61,7 @@
     // todo item has been completed
     checks.forEach((check, i) => {
       check.addEventListener("click", () => {
-        if (rows[i].cart) {
+        if (rows[i].check) {
           updateItem(rows[i]._id, false)
         } else {
           updateItem(rows[i]._id, true)

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
 const itemSchema = {
-  name: String,
-  cart: Boolean,
+  item: String,
+  check: Boolean,
 }
 
 module.exports = mongoose.model("Item", itemSchema)

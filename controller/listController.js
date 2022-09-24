@@ -10,8 +10,8 @@ const getList = async (req, res) => {
 const addItem = async (req, res) => {
   const todoItem = req.query.item
   const item = new Item({
-     name : todoItem,
-     cart : false,
+     item : todoItem,
+     check : false,
   })
   item.save()
   res.status(200).redirect("/")
@@ -25,7 +25,7 @@ const updateItem = async (req, res) => {
     throw new Error("Item not found")
   }
 
-  await Item.findByIdAndUpdate({ _id: req.query.id}, { cart: req.query.action })
+  await Item.findByIdAndUpdate({ _id: req.query.id}, { check: req.query.action })
 
   res.status(200).redirect("/")
 }
